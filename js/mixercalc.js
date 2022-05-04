@@ -12,7 +12,7 @@ var reparseTimer = null;
 var scale = 1;
 var limit = 200;
 var cogImage = null;
-var commandType = "selectone";
+var commandType = "cf1.10"; //default cleanflight 1.10+ (mmix)
 var mousePos = {
     x: 0,
     y: 0
@@ -171,12 +171,12 @@ function updateMmixCommands() {
     var mmix = "";
     mmix += "mixer custom\n";
     mmix += "mmix reset\n";
-    var cmix = "";
-    cmix += "mixer custom\n";
-    cmix += "cmix reset\n";
-    var mwii = "";
-    var kk2mix = '<span style="color:red">*** This has not been tested!! ***</span>\n\n';
-    var arducoptermix = ''; //'<span style="color:red">*** This has not been tested!! ***</span>\n\n';
+//    var cmix = "";
+//    cmix += "mixer custom\n";
+//    cmix += "cmix reset\n";
+//    var mwii = "";
+//    var kk2mix = '<span style="color:red">*** This has not been tested!! ***</span>\n\n';
+//    var arducoptermix = ''; //'<span style="color:red">*** This has not been tested!! ***</span>\n\n';
     if (motors.length > 1) {
         var cg = {
             x: 0,
@@ -216,41 +216,47 @@ function updateMmixCommands() {
             var y = parseFloat(Number(-(motor.mixvalue.y - cg.y) / maxdist).toFixed(3));
             var z = parseFloat(Number(((motor.direction == 0 ? -1 : 1) * d) / maxdistyaw).toFixed(3));
             z = motor.direction == 0 ? -1 : 1; // hmm... yaw values are always the same magnitude no matter their location
-            cmix += "cmix " + i + " 1 " + x + " " + y + " " + z + "\n";
+            //cmix += "cmix " + i + " 1 " + x + " " + y + " " + z + "\n";
             mmix += "mmix " + (i - 1) + " 1 " + x + " " + y + " " + z + "\n";
-            mwii += "motor[" + (i - 1) + "] = PIDMIX(" + x + "," + y + "," + z + ");\n"
-            arducoptermix += "add_motor_raw(AP_MOTORS_MOT_" + i + ", " + x + ", " + (-y) + ", AP_MOTORS_MATRIX_YAW_FACTOR_" + (z > 0 ? "CCW" : "CW") + ", " + i + ");\n"
-            var a = (0.5 * Math.PI) + Math.atan2(y, -x);
-            if (a < 0) a += 2 * Math.PI;
-            var deg = a * 180 / Math.PI;
-            var d = dist(motor.position, cg2);
-            var f = d / maxdistkk;
-            var p = Math.cos(a) * f * 100;
-            var r = Math.sin(a) * f * 100;
-            p = p.toFixed(0);
-            r = r.toFixed(0);
-            if (p == -0) p = 0;
-            if (r == -0) r = 0;
-            kk2mix += "Motor " + i + ": P= " + p.toString().paddingLeft("   ") + "   R= " + r.toString().paddingLeft("   ") + "\n";
+            //mwii += "motor[" + (i - 1) + "] = PIDMIX(" + x + "," + y + "," + z + ");\n"
+            //arducoptermix += "add_motor_raw(AP_MOTORS_MOT_" + i + ", " + x + ", " + (-y) + ", AP_MOTORS_MATRIX_YAW_FACTOR_" + (z > 0 ? "CCW" : "CW") + ", " + i + ");\n"
+            //var a = (0.5 * Math.PI) + Math.atan2(y, -x);
+            //if (a < 0) a += 2 * Math.PI;
+            //var deg = a * 180 / Math.PI;
+            //var d = dist(motor.position, cg2);
+            //var f = d / maxdistkk;
+            //var p = Math.cos(a) * f * 100;
+            //var r = Math.sin(a) * f * 100;
+            //p = p.toFixed(0);
+            //r = r.toFixed(0);
+            //if (p == -0) p = 0;
+            //if (r == -0) r = 0;
+            //kk2mix += "Motor " + i + ": P= " + p.toString().paddingLeft("   ") + "   R= " + r.toString().paddingLeft("   ") + "\n";
         }
-        cmix += "save\n";
+        //cmix += "save\n";
         mmix += "save\n";
     }
     //$("#mmixcommands").text(cmix);
     //$("#mwiicommands").text(mwii);
-    if (commandType == "multiwii") {
-        $("#commands").text(mwii);
-    } else if (commandType == "cf1.9") {
-        $("#commands").text(cmix);
-    } else if (commandType == "cf1.10") {
-        $("#commands").text(mmix);
-    } else if (commandType == "kk2") {
-        $("#commands").html(kk2mix);
-    } else if (commandType == "arducopter") {
-        $("#commands").html(arducoptermix);
-    } else {
-        $("#commands").text("Select a command type");
+    switch (commandType) {
+        case "cf1.10":
+            $("#commands").text(mmix);
+            break;
     }
+
+    //if (commandType == "multiwii") {
+    //    $("#commands").text(mwii);
+    //} else if (commandType == "cf1.9") {
+    //    $("#commands").text(cmix);
+    //} else if (commandType == "cf1.10") {
+    //    $("#commands").text(mmix);
+    //} else if (commandType == "kk2") {
+    //    $("#commands").html(kk2mix);
+    //} else if (commandType == "arducopter") {
+    //    $("#commands").html(arducoptermix);
+    //} else {
+    //    $("#commands").text("Select a command type");
+    //}
 }
 
 function updateMotorConstraintsSatisfied() {
@@ -584,18 +590,6 @@ function doPreset(which) {
                 "1 3 h\n" +
                 "1 2 v");
             break;
-        case "sheep":
-            addMotorsRadial(4, "cf");
-            $("#inputs").val(
-                "2 4 422\n" +
-                "1 3 358\n" +
-                "1 2 275\n" +
-                "3 4 275\n" +
-                "1 4 475\n" +
-                "2 3 475\n" +
-                "2 4 h\n" +
-                "1 3 h");
-            break;
         case "gh160":
             addMotorsRadial(4, "cf");
             $("#inputs").val(
@@ -845,11 +839,12 @@ function onKeyUp(canvas, evt) {
     console.log("keyup: "+evt.keyCode)
 }
 
+//no longer active:
 function onCommandTypeChanged() {
     commandType = $("#commandtype").val();
     //console.log(commandType);
     updateMmixCommands();
-    if (commandType == "cf1.9" || commandType == "cf1.10") $("#cfextra").show();
+    if (commandType == "cf1.9" || commandType == "cf1.10") $("#cfextra").show(); //"remember save"
     else $("#cfextra").hide();
     if (commandType == "arducopter") $("#arducopterextra").show();
     else $("#arducopterextra").hide();

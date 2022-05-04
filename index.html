@@ -30,7 +30,7 @@
         <div id="mixervals">
             <div> Constraints<br>
                 <div>
-                    <textarea id="inputs" style="float:left; height: 250px;"></textarea>
+                    <textarea id="inputs" style="float:left; height: 200px;"></textarea>
                     <div style="display:inline-block;margin-left:15px"> Examples <br> 4 motors:<br>
                         <ul style="margin-left:32px">
                             <li><a href="index.html#" class="preset" id="quadx">Quad X</a></li>
@@ -54,12 +54,9 @@
                 <br> Enter lines in the format:<br>
                 <b>[<i>motor</i>] [<i>motor</i>] [<i>constraint</i>]</b><br>
                 <br> A constraint can be one of:<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>[number]<i></b> - distance between locations<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>h<i></b> - align motors horizontally<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>v<i></b> - align motors vertically<br>
-                <br> The order motors are given in does not matter, and the units used for distances does not matter as long as all distances use the same units.<br>
                 <br> Examples:<br> Motors 1 and 2 are 195mm apart<br>
                 <b>1 2 195</b> <br> Motors 3 and 4 are 220mm apart<br>
-                <b>4 3 220</b> <br>
-                <!--FC and motor 3 are 330mm apart<br>
-		    <b>0 3 330</b> <br>--> Motors 2 and 4 are aligned horizontally<br>
+                <b>4 3 220</b> <br> Motors 2 and 4 are aligned horizontally<br>
                 <b>2 4 h</b> <br> Motors 1 and 2 are aligned vertically<br>
                 <b>2 1 v</b> <br>
                 <br> Constraints will be automatically applied two seconds after the last change has been made. If the motors get into any strange positions you can move them manually by dragging with the mouse. </div>
@@ -67,20 +64,19 @@
     </div>
     <br>
     <br>
-    <h4>Mixer commands</h4>
-    <br> Moving the mouse over the area below will pause updates to let you copy the text.<br>
+    <h4>Mixer commands (<span style="color: red;">Warning: potentially unsafe until all motors constrained to green status in graphical canvas above.</span>)</h4>
     <br>
     <div>
         <div style="width:640px;float:left">
-            <select id="commandtype" onchange="onCommandTypeChanged()">
-                <option value="selectone">Select command type</option>
-                <option value="cf1.10">Cleanflight from 1.10 onwards</option>
-            </select><br><br>
-            <pre id="commands" class="outputpanel">
-		</pre>
+            <!-- <select id="commandtype" onchange="onCommandTypeChanged()"> -->
+                <!-- <option value="selectone">Select command type</option> -->
+                <!-- <option value="cf1.10">Cleanflight from 1.10 onwards</option> -->
+            <!-- </select><br><br> -->
+            <pre id="commands" class="outputpanel"></pre>
+            Moving the mouse over the area below will pause updates to let you copy the text.<br>
             <br>
             <!--<span id="cfextra" style="display:none;color:red">Remember to also execute 'save' to keep the mixer settings!</span>-->
-            <span id="arducopterextra" style="display:none">See AP_MotorsMatrix::setup_motors() in <a href="https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L466">libraries/AP_Motors/AP_MotorsMatrix.cpp</a></span><br>
+            <!--<span id="arducopterextra" style="display:none">See AP_MotorsMatrix::setup_motors() in <a href="https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L466">libraries/AP_Motors/AP_MotorsMatrix.cpp</a></span><br>-->
         </div>
         <br>
         <br>
