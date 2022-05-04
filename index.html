@@ -12,16 +12,18 @@
 <body>
     <h3>Motor mixing calculator, by @iforce2d</h3>
     <br>
-    <div style="width:600px"> This tool lets you calculate mixer settings by simply measuring the distances between motors.<br>
-        <br> After adding the necessary motors on the canvas, enter constraints for pairs of motors, and let the simulation run for a few seconds until the output values at the bottom of the page have settled.<br>
-        <br> To add and delete motors, first click the main canvas to give it keyboard focus. Then you can use these keys: <ul style="margin-left:32px">
-            <li>left arrow - add a CCW motor at the mouse position</li>
-            <li>right arrow - add a CW motor at the mouse position</li>
-            <li>r or up arrow - reverse the rotation of the mouse-overed motor</li>
-            <li>delete or d - delete the mouse-overed motor</li>
+    <div style="width:950px; "> This tool lets you calculate mixer settings by simply measuring the distances between motors. It is intended for "flat" motor layouts. i.e. this will not work for X8, Y6, Z, Lynchpin, etc.  True-X do not gernerally need calculation.  Stretch-X, Squish-X, DeadCat, H, etc. should benefit from calculations.<br>
+        <br> For keyboard input, first click the graphical canvas to give it focus. Then you can use these keys: <ul style="margin-left:32px">
+            <li>left arrow -- add a CCW motor at the mouse position</li>
+            <li>right arrow -- add a CW motor at the mouse position</li>
+            <li>r or up-arrow -- reverse the rotation of the highlighted motor</li>
+            <li>d or delete -- delete the mouse-overed motor</li>
         </ul>
-        <br> Ideally each motor should have three constraints. When three or more constraints are present the inner circle for that motor will turn green. Make sure to have at least one horizontal or vertical constraint to define the overall direction of the layout.<br>
-        <br> For a demonstration of usage, see: <a href="https://www.youtube.com/watch?v=9FvpT9jH0NA">this YouTube video</a>. </div>
+        <br>
+        After adding the necessary motors on the canvas, enter constraints for pairs of motors, and let the simulation run for a few seconds until the output values at the bottom of the page have settled.<br>
+        <br>
+        Ideally each motor should have <b><i>three constraints</i></b>. When three or more constraints are present the inner circle for that motor will turn green. Make sure to have at least one horizontal or vertical constraint to define the overall direction of the layout.<br>
+        <br> For a demonstration of usage, see: <a href="https://www.youtube.com/watch?v=9FvpT9jH0NA" target="_blank">this YouTube video</a>. </div>
     <br>
     <div>
         <canvas id="mixerviz" tabindex="1" width="600" height="600"></canvas>
@@ -32,17 +34,11 @@
                     <div style="display:inline-block;margin-left:15px"> Examples <br> 4 motors:<br>
                         <ul style="margin-left:32px">
                             <li><a href="index.html#" class="preset" id="quadx">Quad X</a></li>
-                            <li><a href="index.html#" class="preset" id="apex5">Apex 5"</a></li>
-                            <li><a href="index.html#" class="preset" id="apex6">Apex 6"</a></li>
-                            <li><a href="index.html#" class="preset" id="apexdc">Apex DC</a></li>
                             <li><a href="index.html#" class="preset" id="quad+">Quad +</a></li>
+                            <!--<li><a href="index.html#" class="preset" id="apex5">Apex 5"</a></li>-->
+                            <li><a href="index.html#" class="preset" id="clone6">Clone 6"</a></li>
                             <li><a href="index.html#" class="preset" id="zmr">ZMR250</a></li>
-                            <!--<li><a href="#" class="preset" id="et200">Diatone ET200</a></li>-->
-                            <li><a href="index.html#" class="preset" id="sheep">Diatone White sheep</a></li>
-                            <!--<li><a href="#" class="preset" id="blade37">Diatone Blade #37</a></li>-->
-                            <!--<li><a href="#" class="preset" id="kk260">KingKong 260</a></li>-->
                             <li><a href="index.html#" class="preset" id="gh160">Diatone Grasshopper 160</a></li>
-                            <!--<li><a href="#" class="preset" id="kk188">KingKong 188</a></li>-->
                         </ul> 6 motors:<br>
                         <ul style="margin-left:32px">
                             <li><a href="index.html#" class="preset" id="hexx">Hex X</a></li>

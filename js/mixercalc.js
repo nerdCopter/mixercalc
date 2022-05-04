@@ -526,93 +526,115 @@ function addMotorsRadial(howMany, layout) {
 }
 
 function doPreset(which) {
-    if (which == "quadx") {
-        addMotorsRadial(4, "cf");
-        $("#inputs").val("");
-    }
-    if (which == "apex5") {
-        addMotorsRadial(4, "cf");
-        $("#inputs").val("1 2 208 \n" +
-            "3 4 208 \n" +
-            "1 3 218 \n" +
-            "2 4 218\n" +
-            "1 4 256\n" +
-            "2 3 256\n" +
-            "2 4 h\n" +
-            "1 3 h\n" +
-            "1 2 v\n" +
-            "3 4 v\n");
-    }
-    if (which == "quad+") {
-        addMotorsRadial(4, "cf");
-        $("#inputs").val("1 2 150\n" +
-            "1 3 150\n" +
-            "2 4 150\n" +
-            "3 4 150\n" +
-            "1 4 212.132\n" +
-            "2 3 212.132\n" +
-            "1 4 v\n" +
-            "2 3 h");
-    }
-    if (which == "zmr") {
-        addMotorsRadial(4, "cf");
-        $("#inputs").val("1 2 156\n" +
-            "3 4 156\n" +
-            "1 3 202\n" +
-            "2 4 202\n" +
-            "1 4 256\n" +
-            "2 3 256\n" +
-            "2 4 h\n" +
-            "1 3 h\n" +
-            "1 2 v");
-    }
-    if (event.target.id == "sheep") {
-        addMotorsRadial(4, "cf");
-        $("#inputs").val("2 4 422\n" +
-            "1 3 358\n" +
-            "1 2 275\n" +
-            "3 4 275\n" +
-            "1 4 475\n" +
-            "2 3 475\n" +
-            "2 4 h\n" +
-            "1 3 h");
-    }
-    if (event.target.id == "gh160") {
-        addMotorsRadial(4, "cf");
-        $("#inputs").val("1 2 107\n" +
-            "3 4 107\n" +
-            "1 3 110\n" +
-            "2 4 135\n" +
-            "1 4 162\n" +
-            "2 3 162\n" +
-            "2 4 h\n" +
-            "1 3 h");
-    }
-    if (which == "hexx") {
-        addMotorsRadial(6, "cf");
-        $("#inputs").val("");
-    }
-    if (which == "octx") {
-        addMotorsRadial(8, "cf");
-        $("#inputs").val("");
-    }
-    if (which == "jure") {
-        addMotorsRadial(8, "cf");
-        $("#inputs").val("2 7 998\n" +
-            "4 5 998\n" +
-            "2 5 765\n" +
-            "4 7 765\n" +
-            "2 5 h\n" +
-            "2 7 v\n" +
-            "3 6 344\n" +
-            "1 8 344\n" +
-            "3 8 530\n" +
-            "1 6 530\n" +
-            "1 6 h\n" +
-            "1 8 v\n" +
-            "3 6 v\n" +
-            "3 8 h");
-    }
+    switch (which) {
+        case "quadx":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val("");
+            break;
+        case "apex5":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val(
+                "1 2 208 \n" +
+                "3 4 208 \n" +
+                "1 3 218 \n" +
+                "2 4 218\n" +
+                "1 4 256\n" +
+                "2 3 256\n" +
+                "2 4 h\n" +
+                "1 3 h\n" +
+                "1 2 v\n" +
+                "3 4 v\n");
+            break;
+        case "clone6":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val(
+                "1 2 158 \n" +
+                "3 4 158 \n" +
+                "1 3 260 \n" +
+                "2 4 260\n" +
+                "1 4 304.24\n" +
+                "2 3 304.24\n" +
+                "2 4 h\n" +
+                "1 3 h\n" +
+                "1 2 v\n" +
+                "3 4 v\n");
+            break;
+        case "quad+":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val(
+                "1 2 150\n" +
+                "1 3 150\n" +
+                "2 4 150\n" +
+                "3 4 150\n" +
+                "1 4 212.132\n" +
+                "2 3 212.132\n" +
+                "1 4 v\n" +
+                "2 3 h");
+            break;
+        case "zmr":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val(
+                "1 2 156\n" +
+                "3 4 156\n" +
+                "1 3 202\n" +
+                "2 4 202\n" +
+                "1 4 256\n" +
+                "2 3 256\n" +
+                "2 4 h\n" +
+                "1 3 h\n" +
+                "1 2 v");
+            break;
+        case "sheep":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val(
+                "2 4 422\n" +
+                "1 3 358\n" +
+                "1 2 275\n" +
+                "3 4 275\n" +
+                "1 4 475\n" +
+                "2 3 475\n" +
+                "2 4 h\n" +
+                "1 3 h");
+            break;
+        case "gh160":
+            addMotorsRadial(4, "cf");
+            $("#inputs").val(
+                "1 2 107\n" +
+                "3 4 107\n" +
+                "1 3 110\n" +
+                "2 4 135\n" +
+                "1 4 162\n" +
+                "2 3 162\n" +
+                "2 4 h\n" +
+                "1 3 h");
+            break;
+        case "hexx":
+            addMotorsRadial(6, "cf");
+            $("#inputs").val("");
+            break;
+        case "octx":
+            addMotorsRadial(8, "cf");
+            $("#inputs").val("");
+            break;
+        case "jure":
+            addMotorsRadial(8, "cf");
+            $("#inputs").val(
+                "2 7 998\n" +
+                "4 5 998\n" +
+                "2 5 765\n" +
+                "4 7 765\n" +
+                "2 5 h\n" +
+                "2 7 v\n" +
+                "3 6 344\n" +
+                "1 8 344\n" +
+                "3 8 530\n" +
+                "1 6 530\n" +
+                "1 6 h\n" +
+                "1 8 v\n" +
+                "3 6 v\n" +
+                "3 8 h");
+            break;
+        }
     doReparse();
 }
 $(document).ready(function() {
