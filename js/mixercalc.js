@@ -771,58 +771,56 @@ function onMouseUp(canvas, evt) {
 function onKeyUp(canvas, evt) {
     var motorPos = mixerPosToMotorPos(canvasPosToMixerPos(mousePos));
     var nextMotorNumber = motors.length;
-    if (evt.keyCode == 37) { //left
-        motors.push({
-            number: nextMotorNumber,
-            direction: 1,
-            position: motorPos
-        });
-        initMotorImages();
-        updateMotorConstraintsSatisfied();
-    } else if (evt.keyCode == 39) { //right
-        motors.push({
-            number: nextMotorNumber,
-            direction: 0,
-            position: motorPos
-        });
-        initMotorImages();
-        updateMotorConstraintsSatisfied();
-    } else if (evt.keyCode == 46 || evt.keyCode == 68) { // delete or d
-        if (!draggingMotor && highlightedMotor) {
-            motors.splice(highlightedMotor, 1);
-            for (var i = 0; i < motors.length; i++) {
-                motors[i].number = i;
+
+    switch (evt.keyCode) {
+        case 37:  //left
+            motors.push({
+                number: nextMotorNumber,
+                direction: 1,
+                position: motorPos
+            });
+            initMotorImages();
+            updateMotorConstraintsSatisfied();
+            break;
+        case 39:  //right
+            motors.push({
+                number: nextMotorNumber,
+                direction: 0,
+                position: motorPos
+            });
+            initMotorImages();
+            updateMotorConstraintsSatisfied();
+            break;
+        case 46: //delete
+        case 68: // d
+            if (!draggingMotor && highlightedMotor) {
+                motors.splice(highlightedMotor, 1);
+                for (var i = 0; i < motors.length; i++) {
+                    motors[i].number = i;
+                }
+                for (var i = relations.length - 1; i >= 0; i--) {
+                    if (relations[i].a >= motors.length || relations[i].b >= motors.length) {
+                        relations.splice(i, 1);
+                    }
+                }
+                updateMotorConstraintsSatisfied();
+                doReparse();
             }
-            for (var i = relations.length - 1; i >= 0; i--) {
-                if (relations[i].a >= motors.length || relations[i].b >= motors.length) {
-                    relations.splice(i, 1);
+            break;
+        case 38: //38 = up
+        case 82: //82 = r
+            if (!draggingMotor && highlightedMotor) {
+                var motor = motors[highlightedMotor];
+                motor.direction = 1 - motor.direction;
+                if (motor.direction == 1) {
+                    motor.image.src = "images/emu-prop-cw.png";
+                } else {
+                    motor.image.src = "images/emu-prop-ccw.png";
                 }
             }
-            updateMotorConstraintsSatisfied();
-            doReparse();
-        }
-    } else if (evt.keyCode == 38) { //38 = up   //82 = r
-        if (!draggingMotor && highlightedMotor) {
-            var motor = motors[highlightedMotor];
-            motor.direction = 1 - motor.direction;
-            if (motor.direction == 1) {
-                motor.image.src = "images/emu-prop-cw.png";
-            } else {
-                motor.image.src = "images/emu-prop-ccw.png";
-            }
-        }
-    } else if (evt.keyCode == 82) { //38 = up   //82 = r
-        if (!draggingMotor && highlightedMotor) {
-            var motor = motors[highlightedMotor];
-            motor.direction = 1 - motor.direction;
-            if (motor.direction == 1) {
-                motor.image.src = "images/emu-prop-cw.png";
-            } else {
-                motor.image.src = "images/emu-prop-ccw.png";
-            }
-        }
-        console.log();
+            break;
     }
+    console.log("keyup: "+evt.keyCode)
 }
 
 function onCommandTypeChanged() {
